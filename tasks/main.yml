@@ -1,2 +1,14 @@
 ---
-# tasks file for vagrant-box
+- name: create vagrant user with pass
+  user: name=vagrant group=vagrant update_password=always password="{{ vagrantbox_crypted_password }}" home="{{ vagrantbox_vagrant_home }}" state=present
+  when: vagrantbox_set_password == true
+
+- name: create vagrant user without pass
+  user: name=vagrant group=vagrant home="{{ vagrantbox_vagrant_home }}" state=present
+  when: vagrantbox_set_password == false
+
+- name: create vagrant ssh dir
+  file: path="{{ vagrantbox_vagrant_home }}/.ssh" owner=vagrant group=vagrant mode=0700 state=directory
+
+- name: install public key for vagrant
+  copy: src="{{ vagrantbox_public_key }}" dest="{{ vagrantbox_vagrant_home }}/.ssh/authorized_keys" owner=vagrant group=vagrant mode=0600
