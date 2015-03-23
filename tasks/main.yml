@@ -1,17 +1,20 @@
 ---
 - name: create vagrant user with pass
-  user: name=vagrant group=vagrant update_password=always password="{{ vagrantbox_crypted_password }}" home="{{ vagrantbox_vagrant_home }}" state=present
+  user: name="{{ vagrantbox_vagrant_user }}" group="{{ vagrantbox_vagrant_user }}" update_password=always password="{{ vagrantbox_crypted_password }}" home="{{ vagrantbox_vagrant_home }}" state=present
   when: vagrantbox_set_password == true
 
 - name: create vagrant user without pass
-  user: name=vagrant group=vagrant home="{{ vagrantbox_vagrant_home }}" state=present
+  user: name="{{ vagrantbox_vagrant_user }}" group="{{ vagrantbox_vagrant_user }}" home="{{ vagrantbox_vagrant_home }}" state=present
   when: vagrantbox_set_password == false
 
 - name: create vagrant ssh dir
-  file: path="{{ vagrantbox_vagrant_home }}/.ssh" owner=vagrant group=vagrant mode=0700 state=directory
+  file: path="{{ vagrantbox_vagrant_home }}/.ssh" owner="{{ vagrantbox_vagrant_user }}" group="{{ vagrantbox_vagrant_user }}" mode=0700 state=directory
 
 - name: install public key for vagrant
-  copy: src="{{ vagrantbox_public_key }}" dest="{{ vagrantbox_vagrant_home }}/.ssh/authorized_keys" owner=vagrant group=vagrant mode=0600
+  copy: src="{{ vagrantbox_public_key }}" dest="{{ vagrantbox_vagrant_home }}/.ssh/authorized_keys" owner="{{ vagrantbox_vagrant_user }}" group="{{ vagrantbox_vagrant_user }}" mode=0600
+
+- name: configure sudo for vagrant
+  template: src=vagrant.sudoers.j2 dest="/etc/sudoers.d/{{ vagrantbox_vagrant_user }}" owner=root group=root mode=0440
 
 - name: update all packages
   yum: name=* state=latest
