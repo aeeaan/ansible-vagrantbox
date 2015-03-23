@@ -12,3 +12,10 @@
 
 - name: install public key for vagrant
   copy: src="{{ vagrantbox_public_key }}" dest="{{ vagrantbox_vagrant_home }}/.ssh/authorized_keys" owner=vagrant group=vagrant mode=0600
+
+- name: update all packages
+  yum: name=* state=latest
+
+- name: install open-vm-tools
+  yum: name=open-vm-tools state=present
+  when: vagrantbox_hypervisor == 'vmware'

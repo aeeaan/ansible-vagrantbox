@@ -3,3 +3,4 @@ vagrantbox_vagrant_home: /home/vagrant
 vagrantbox_set_password: true
 vagrantbox_crypted_password: $6$rounds=40000$fCtQS1S1Uj8IylvT$YVL9k3gIlh.mk6USDf6ZXQRVk8DilUEUAdSRqwdgFAaup00QhQgTf1ABuFAjtc9HS1sxjHEcNbefNqjEDAeAs1
 vagrantbox_public_key: vagrant.pub
+vagrantbox_hypervisor: vmware
