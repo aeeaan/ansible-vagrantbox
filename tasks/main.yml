@@ -18,7 +18,3 @@
 
 - name: update all packages
   yum: name=* state=latest
-
-- name: install open-vm-tools
-  yum: name=open-vm-tools state=present
-  when: vagrantbox_hypervisor == 'vmware'
