@@ -18,3 +18,10 @@
 
 - name: update all packages
   yum: name=* state=latest
+
+- name: install tools to build vmware tools
+  yum: name={{ item }} state=present
+  with_items:
+    - perl
+    - net-tools
+  when: vagrantbox_install_tools == true and vagrantbox_hypervisor == 'vmware'
