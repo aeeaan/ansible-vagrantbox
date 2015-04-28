@@ -25,6 +25,7 @@
 - name: install minimal tools to build additions
   yum: name={{ item }} state=present
   with_items:
+    - bzip2
     - make
     - gcc
     - kernel-devel
