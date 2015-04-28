@@ -6,3 +6,4 @@ vagrantbox_crypted_password: $6$rounds=40000$fCtQS1S1Uj8IylvT$YVL9k3gIlh.mk6USDf
 vagrantbox_public_key: vagrant.pub
 vagrantbox_hypervisor: virtualbox
 vagrantbox_install_tools: true
+vagrantbox_disable_selinux: true
