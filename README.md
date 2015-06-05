@@ -1,22 +1,20 @@
-Role Name
+correcthorse.vagrantbox
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This is a role to help prepare a virtual machine for conversion into a vagrant box. It takes care of a few common tasks like creating the vagrant user, setting up the expected insecure passwords/keys and installing some basic build tools that are needed to install virtual machine additions.
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+| Variable				| Default			|				|
+| :---					| :---				| :---				|
+| vagrantbox_vagrant_user		| vagrant			|				|
+| vagrantbox_vagrant_home		| /home/vagrant			|				|
+| vagrantbox_set_password		| true				|				|
+| vagrantbox_crypted_password		| $6$rounds=40000$fCtQS1S1Uj8IylvT$YVL9k3gIlh.mk6USDf6ZXQRVk8DilUEUAdSRqwdgFAaup00QhQgTf1ABuFAjtc9HS1sxjHEcNbefNqjEDAeAs1   | |
+| vagrantbox_public_key			| vagrant.pub			|				|
+| vagrantbox_hypervisor			| virtualbox			|				|
+| vagrantbox_install_tools		| true				|				|
+| vagrantbox_disable_selinux		| true				|				|
 
 Example Playbook
 ----------------
@@ -25,7 +23,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: correcthorse.vagrantbox }
 
 License
 -------
@@ -35,4 +33,4 @@ MIT
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+* [Joshua Rusch](https://correct.horse/)
